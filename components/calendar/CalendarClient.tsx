@@ -65,16 +65,13 @@ export default function CalendarClient({ tasks }: CalendarClientProps) {
   return (
     <div className="bg-card p-6 md:p-8 rounded-3xl shadow-sm border border-border/50">
       <FullCalendar
-        plugins={[dayGridPlugin]}
+        plugins={[dayGridPlugin as any]}
         initialView="dayGridMonth"
         events={events}
         eventClick={handleEventClick}
         headerToolbar={{
           left: "title",
           right: "prev,next today"
-        }}
-        buttonText={{
-          today: "Hari Ini"
         }}
         height="auto"
         aspectRatio={1.35}

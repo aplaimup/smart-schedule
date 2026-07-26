@@ -288,7 +288,7 @@ export default function TasksClient({ userId }: { userId: string }) {
               <Label>Prioritas</Label>
               <Select 
                 value={formData.priority} 
-                onValueChange={(val: "LOW"|"MEDIUM"|"HIGH") => setFormData({...formData, priority: val})}
+                onValueChange={(val: any) => setFormData({...formData, priority: val})}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Pilih prioritas" />
