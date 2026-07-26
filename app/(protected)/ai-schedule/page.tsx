@@ -1,10 +1,10 @@
-import { getSession } from "@/lib/session";
+import { getSession, requireSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import AIScheduleClient from "@/components/ai-schedule/AIScheduleClient";
 import { Bot } from "lucide-react";
 
 export default async function AISchedulePage() {
-  const session = await getSession();
+  const session = await requireSession();
   
   // Ambil hanya task yang belum selesai (PENDING)
   const pendingTasks = await prisma.task.findMany({

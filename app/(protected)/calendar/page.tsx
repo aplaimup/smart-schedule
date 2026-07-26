@@ -1,10 +1,10 @@
-import { getSession } from "@/lib/session";
+import { getSession, requireSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import CalendarClient from "@/components/calendar/CalendarClient";
 import { CalendarDays } from "lucide-react";
 
 export default async function CalendarPage() {
-  const session = await getSession();
+  const session = await requireSession();
   
   // Ambil semua task milik user
   const tasks = await prisma.task.findMany({

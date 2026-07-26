@@ -1,8 +1,8 @@
-import { getSession } from "@/lib/session";
+import { getSession, requireSession } from "@/lib/session";
 import TasksClient from "@/components/tasks/TasksClient";
 
 export default async function TasksPage() {
-  const session = await getSession();
+  const session = await requireSession();
   
   return (
     <div className="min-h-screen bg-background p-6 md:p-10 font-sans">

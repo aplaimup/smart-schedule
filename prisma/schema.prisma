@@ -25,6 +25,11 @@ enum Status {
   DONE
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 // ============================================
 // Models
 // ============================================
@@ -32,10 +37,12 @@ enum Status {
 model User {
   id        String   @id @default(uuid())
   name      String
-  email     String   @unique
-  password  String // hashed password
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  email          String   @unique
+  password       String // hashed password
+  role           Role     @default(USER)
+  aiUsageCount   Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   tasks Task[]
 

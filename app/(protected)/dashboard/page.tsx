@@ -3,10 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { CalendarClock, ListTodo, TrendingUp } from "lucide-react";
 
-import { getSession } from "@/lib/session";
+import { getSession, requireSession } from "@/lib/session";
 
 export default async function DashboardPage() {
-  const session = await getSession();
+  const session = await requireSession();
   const userId = session.user.id;
 
   // 1. Ambil data: Aktivitas hari ini (Deadline hari ini)

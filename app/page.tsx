@@ -14,9 +14,12 @@ export default function Home() {
           </div>
           <span className="font-bold text-xl tracking-tight text-foreground">Smart Schedule <span className="text-primary">AI</span></span>
         </div>
-        <nav className="flex gap-3">
+        <nav className="flex gap-3 items-center">
           <Link href="/login">
             <Button variant="ghost" className="hidden sm:flex font-medium">Masuk</Button>
+          </Link>
+          <Link href="/register">
+            <Button variant="ghost" className="hidden sm:flex font-medium">Daftar</Button>
           </Link>
           <Link href="/register">
             <Button className="rounded-full px-6 font-medium shadow-sm">Mulai Sekarang</Button>

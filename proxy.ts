@@ -2,19 +2,24 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function proxy(request: NextRequest) {
-  // Dalam skenario nyata, ini akan mengecek token JWT dari Supabase atau NextAuth
-  // Untuk saat ini kita mengecek cookie 'smart-schedule-session' fiktif
-  const sessionCookie = request.cookies.get('smart-schedule-session');
+  const sessionCookie = request.cookies.get('smart-schedule-session')?.value;
+  const roleCookie = request.cookies.get('smart-schedule-role')?.value;
   
-  // Rute yang perlu diproteksi
-  const protectedRoutes = ['/dashboard', '/tasks', '/calendar', '/ai-schedule', '/productivity'];
+  // Admin routes protection
+  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin');
+  if (isAdminRoute && roleCookie !== 'ADMIN') {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }
+
+  // Regular protected routes
+  const protectedRoutes = ['/dashboard', '/tasks', '/calendar', '/ai-schedule', '/productivity', '/admin'];
   const isProtectedRoute = protectedRoutes.some(route => request.nextUrl.pathname.startsWith(route));
   
   if (isProtectedRoute && !sessionCookie) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  // Rute otentikasi (tidak boleh diakses jika sudah login)
+  // Auth routes (cannot be accessed if logged in)
   const authRoutes = ['/login', '/register'];
   const isAuthRoute = authRoutes.some(route => request.nextUrl.pathname.startsWith(route));
 

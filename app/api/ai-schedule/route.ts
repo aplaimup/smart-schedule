@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { getSession } from "@/lib/session";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function POST(req: Request) {
@@ -64,6 +66,15 @@ export async function POST(req: Request) {
     const responseText = result.response.text();
     if (!responseText) {
       throw new Error("Respons kosong dari Gemini");
+    }
+
+    const session = await getSession();
+    // Increment aiUsageCount for the user
+    if (session?.user?.id) {
+      await prisma.user.update({
+        where: { id: session.user.id },
+        data: { aiUsageCount: { increment: 1 } }
+      });
     }
 
     const parsedData = JSON.parse(responseText);

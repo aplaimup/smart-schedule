@@ -1,11 +1,11 @@
-import { getSession } from "@/lib/session";
+import { getSession, requireSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, CheckCircle2, CircleDashed } from "lucide-react";
 
 export default async function ProductivityPage() {
-  const session = await getSession();
+  const session = await requireSession();
   const userId = session.user.id;
 
   // Mengambil total task yang sudah selesai dan belum selesai

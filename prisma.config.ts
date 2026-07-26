@@ -5,6 +5,8 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 export default defineConfig({
+  // @ts-ignore
+  earlyAccess: true,
   schema: path.join(__dirname, "prisma", "schema.prisma"),
 
   datasource: {

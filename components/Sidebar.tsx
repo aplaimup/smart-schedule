@@ -10,7 +10,8 @@ import {
   TrendingUp, 
   LogOut, 
   Sparkles,
-  Menu
+  Menu,
+  ShieldAlert
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -23,16 +24,21 @@ const navItems = [
   { name: "Produktivitas", href: "/productivity", icon: TrendingUp },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ role }: { role?: string }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     document.cookie = "smart-schedule-session=; path=/; max-age=0";
+    document.cookie = "smart-schedule-role=; path=/; max-age=0";
     router.push("/login");
     router.refresh();
   };
+
+  const filteredNavItems = role === "ADMIN" 
+    ? [...navItems, { name: "Admin Panel", href: "/admin", icon: ShieldAlert }] 
+    : navItems;
 
   return (
     <>
@@ -61,7 +67,7 @@ export default function Sidebar() {
         </div>
 
         <div className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
-          {navItems.map((item) => {
+          {filteredNavItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link key={item.href} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
