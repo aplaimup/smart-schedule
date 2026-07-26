@@ -1,71 +1,149 @@
+import Link from 'next/link';
+import { ArrowRight, Calendar, CheckSquare, Sparkles, BarChart3 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="text-center space-y-6 max-w-2xl">
-        {/* Logo & Brand */}
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-primary-foreground"
-            >
-              <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-              <line x1="16" x2="16" y1="2" y2="6" />
-              <line x1="8" x2="8" y1="2" y2="6" />
-              <line x1="3" x2="21" y1="10" y2="10" />
-              <path d="m9 16 2 2 4-4" />
-            </svg>
+    <div className="min-h-screen bg-background flex flex-col font-sans">
+      
+      {/* Navigation Bar */}
+      <header className="px-6 lg:px-8 py-4 flex items-center justify-between border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-sm">
+             <Sparkles className="w-4 h-4 text-primary-foreground" />
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Smart Schedule{" "}
-            <span className="text-primary">AI</span>
-          </h1>
+          <span className="font-bold text-xl tracking-tight text-foreground">Smart Schedule <span className="text-primary">AI</span></span>
         </div>
+        <nav className="flex gap-3">
+          <Link href="/login">
+            <Button variant="ghost" className="hidden sm:flex font-medium">Masuk</Button>
+          </Link>
+          <Link href="/register">
+            <Button className="rounded-full px-6 font-medium shadow-sm">Mulai Sekarang</Button>
+          </Link>
+        </nav>
+      </header>
 
-        {/* Tagline */}
-        <p className="text-lg text-muted-foreground leading-relaxed">
-          Manajemen jadwal cerdas berbasis kecerdasan buatan.
-          <br />
-          Optimalkan waktu Anda, atur prioritas, dan sinkronkan kalender secara otomatis.
-        </p>
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <section className="relative px-6 lg:px-8 py-24 md:py-32 flex flex-col items-center text-center max-w-5xl mx-auto">
+          {/* Subtle background glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] md:w-[800px] h-[300px] md:h-[500px] bg-primary/10 blur-[80px] md:blur-[120px] rounded-full pointer-events-none -z-10" />
 
-        {/* Status Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-medium">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
-          </span>
-          Project Setup Complete — Ready for Development
-        </div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-8 ring-1 ring-primary/20">
+            <Sparkles className="w-4 h-4" />
+            <span>Kendalikan Waktu Anda dengan AI</span>
+          </div>
 
-        {/* Tech Stack */}
-        <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
-          {[
-            "Next.js 15",
-            "TypeScript",
-            "Tailwind CSS",
-            "shadcn/ui",
-            "Prisma",
-            "OpenAI",
-            "FullCalendar",
-          ].map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 rounded-md bg-accent text-accent-foreground text-xs font-medium"
-            >
-              {tech}
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground mb-6 leading-tight">
+            Manajemen Jadwal Cerdas <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400">
+              Tanpa Usaha Ekstra
             </span>
-          ))}
+          </h1>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl leading-relaxed">
+            Smart Schedule AI membantu Anda mengoptimalkan waktu, mengatur prioritas tugas, dan menyinkronkan kalender harian secara otomatis.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <Link href="/register" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full text-base h-14 px-8 rounded-full shadow-lg shadow-primary/25 transition-transform hover:scale-105 font-semibold">
+                Mulai Sekarang <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+            <Link href="/login" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full text-base h-14 px-8 rounded-full font-semibold border-2 hover:bg-secondary/50">
+                Masuk
+              </Button>
+            </Link>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="px-6 lg:px-8 py-24 bg-gradient-to-b from-background to-secondary/30 border-t border-border/40">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Fitur Unggulan</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Tingkatkan produktivitas Anda dengan serangkaian alat cerdas yang didesain khusus untuk kebutuhan manajemen waktu modern.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+              {/* Card 1 */}
+              <div className="bg-card text-card-foreground p-8 rounded-3xl shadow-sm border border-border/50 hover:shadow-md hover:border-primary/30 transition-all group">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                  <CheckSquare className="w-7 h-7" />
+                </div>
+                <h3 className="font-bold text-xl mb-3">Task Management</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Catat, atur, dan pantau seluruh tugas harian Anda di satu tempat terpusat dengan antarmuka yang bersih dan mudah digunakan.
+                </p>
+              </div>
+
+              {/* Card 2 */}
+              <div className="bg-card text-card-foreground p-8 rounded-3xl shadow-sm border border-border/50 hover:shadow-md hover:border-primary/30 transition-all group">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                  <Calendar className="w-7 h-7" />
+                </div>
+                <h3 className="font-bold text-xl mb-3">Kalender Visual</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Lihat jadwal Anda secara komprehensif dalam tampilan kalender yang interaktif, dinamis, dan terhubung dengan semua tugas.
+                </p>
+              </div>
+
+              {/* Card 3 */}
+              <div className="bg-card text-card-foreground p-8 rounded-3xl shadow-sm border border-border/50 hover:shadow-md hover:border-primary/30 transition-all group">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                  <Sparkles className="w-7 h-7" />
+                </div>
+                <h3 className="font-bold text-xl mb-3">AI Schedule Generator</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Biarkan kecerdasan buatan menyusun jadwal paling optimal untuk Anda berdasarkan prioritas, estimasi waktu, dan tenggat waktu.
+                </p>
+              </div>
+
+              {/* Card 4 */}
+              <div className="bg-card text-card-foreground p-8 rounded-3xl shadow-sm border border-border/50 hover:shadow-md hover:border-primary/30 transition-all group">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                  <BarChart3 className="w-7 h-7" />
+                </div>
+                <h3 className="font-bold text-xl mb-3">Productivity Summary</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Dapatkan wawasan berharga tentang pola kerja mingguan Anda dan tingkatkan efisiensi serta produktivitas harian secara terukur.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="px-6 lg:px-8 py-16 bg-card border-t border-border/50 mt-auto">
+        <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+          <div className="flex items-center gap-2 mb-8 opacity-80 hover:opacity-100 transition-opacity cursor-default">
+            <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+              <Sparkles className="w-4 h-4 text-primary" />
+            </div>
+            <span className="font-bold text-xl tracking-tight">Smart Schedule AI</span>
+          </div>
+          
+          <div className="space-y-4">
+            <p className="text-sm md:text-base text-muted-foreground font-medium">
+              © 2026 Smart Schedule AI • Kelompok 7 • Teknik Informatika • Universitas Malikussaleh
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <div className="h-px bg-border/80 w-12 hidden md:block"></div>
+              <p className="text-sm md:text-base text-foreground/80 font-semibold tracking-wide leading-relaxed max-w-lg md:max-w-none">
+                Rizka Aflah Hasibuan • Aisyah Wanda Delfia • Nyak Khairiah • Fuzia Nizla Siregar
+              </p>
+              <div className="h-px bg-border/80 w-12 hidden md:block"></div>
+            </div>
+          </div>
         </div>
-      </div>
-    </main>
+      </footer>
+
+    </div>
   );
 }
