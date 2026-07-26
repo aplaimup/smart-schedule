@@ -39,6 +39,7 @@ export default function RootLayout({
     <html
       lang="id"
       className={`${poppins.variable} ${geistMono.variable} h-full antialiased overflow-x-hidden`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <ThemeProvider
