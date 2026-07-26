@@ -41,7 +41,7 @@ export default function TasksClient({ userId }: { userId: string }) {
     title: "",
     description: "",
     deadline: "",
-    duration: 30,
+    duration: "30",
     priority: "MEDIUM" as "LOW" | "MEDIUM" | "HIGH",
   });
 
@@ -74,7 +74,7 @@ export default function TasksClient({ userId }: { userId: string }) {
 
   const handleOpenAdd = () => {
     setEditingId(null);
-    setFormData({ title: "", description: "", deadline: "", duration: 30, priority: "MEDIUM" });
+    setFormData({ title: "", description: "", deadline: "", duration: "30", priority: "MEDIUM" });
     setIsFormOpen(true);
   };
 
@@ -84,7 +84,7 @@ export default function TasksClient({ userId }: { userId: string }) {
       title: task.title,
       description: task.description || "",
       deadline: new Date(task.deadline).toISOString().slice(0, 16), // datetime-local format YYYY-MM-DDThh:mm
-      duration: task.duration,
+      duration: String(task.duration),
       priority: task.priority,
     });
     setIsFormOpen(true);
@@ -108,7 +108,10 @@ export default function TasksClient({ userId }: { userId: string }) {
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          duration: parseInt(formData.duration as string, 10) || 0
+        }),
       });
 
       if (!res.ok) throw new Error("Gagal menyimpan tugas");
@@ -280,7 +283,13 @@ export default function TasksClient({ userId }: { userId: string }) {
                   id="duration" 
                   type="number" 
                   value={formData.duration} 
-                  onChange={(e) => setFormData({...formData, duration: parseInt(e.target.value) || 0})} 
+                  onChange={(e) => {
+                    let val = e.target.value;
+                    if (val.length > 1 && val.startsWith('0')) {
+                      val = val.replace(/^0+/, '');
+                    }
+                    setFormData({...formData, duration: val});
+                  }} 
                 />
               </div>
             </div>
