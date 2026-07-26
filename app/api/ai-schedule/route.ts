@@ -1,24 +1,24 @@
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function POST(req: Request) {
   try {
-    if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY.includes("sk-...")) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey || apiKey.includes("AIza...")) {
       return NextResponse.json(
-        { error: "API Key OpenAI belum dikonfigurasi di environment variables." },
+        { error: "API Key Gemini belum dikonfigurasi di environment variables." },
         { status: 500 }
       );
     }
+
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const { tasks } = await req.json();
 
     if (!tasks || !Array.isArray(tasks) || tasks.length === 0) {
       return NextResponse.json(
-        { error: "Tidak ada tugas PENDING yang dikirimkan." },
+        { error: "Tidak ada aktivitas PENDING yang dikirimkan." },
         { status: 400 }
       );
     }
@@ -53,25 +53,23 @@ export async function POST(req: Request) {
       }
     `;
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini", // Model cepat dan murah yang mendukung JSON mode
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: "You are a helpful scheduling assistant designed to output JSON." },
-        { role: "user", content: prompt }
-      ],
-      temperature: 0.2, // Rendah agar lebih deterministik
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      generationConfig: {
+        responseMimeType: "application/json",
+        temperature: 0.2,
+      }
     });
 
-    const responseContent = completion.choices[0]?.message?.content;
-    if (!responseContent) {
-      throw new Error("Respons kosong dari OpenAI");
+    const responseText = result.response.text();
+    if (!responseText) {
+      throw new Error("Respons kosong dari Gemini");
     }
 
-    const parsedData = JSON.parse(responseContent);
+    const parsedData = JSON.parse(responseText);
     return NextResponse.json(parsedData);
   } catch (error: any) {
-    console.error("AI Schedule API error:", error);
+    console.error("AI Schedule API error (Gemini):", error);
     return NextResponse.json(
       { error: error.message || "Terjadi kesalahan internal pada server AI." },
       { status: 500 }
