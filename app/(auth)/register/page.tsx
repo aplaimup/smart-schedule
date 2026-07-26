@@ -28,9 +28,8 @@ export default function RegisterPage() {
       
       if (!res.ok) throw new Error(data.error || "Gagal mendaftar");
 
-      toast.success("Akun berhasil dibuat!");
-      router.push("/dashboard");
-      router.refresh();
+      toast.success("Akun berhasil dibuat! Silakan masuk.");
+      router.push("/login");
     } catch (error: any) {
       toast.error(error.message);
     } finally {

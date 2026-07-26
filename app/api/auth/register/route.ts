@@ -42,24 +42,8 @@ export async function POST(req: Request) {
       },
     });
 
-    // Set cookie
-    const cookieStore = await cookies();
-    cookieStore.set("smart-schedule-session", user.id, {
-      path: "/",
-      maxAge: 86400,
-      httpOnly: true,
-      sameSite: "lax",
-    });
-    
-    cookieStore.set("smart-schedule-role", user.role, {
-      path: "/",
-      maxAge: 86400,
-      httpOnly: false,
-      sameSite: "lax",
-    });
-
     return NextResponse.json(
-      { message: "Registrasi berhasil", user: { id: user.id, name: user.name, role: user.role } },
+      { message: "Registrasi berhasil, silakan masuk", user: { id: user.id, name: user.name, role: user.role } },
       { status: 201 }
     );
   } catch (error) {
