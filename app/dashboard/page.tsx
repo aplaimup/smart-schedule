@@ -3,18 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { CalendarClock, ListTodo, TrendingUp } from "lucide-react";
 
-// ==========================================
-// Mock Session Authentication
-// ==========================================
-// Nantinya ini akan diganti dengan autentikasi asli (seperti NextAuth / Supabase Auth)
-async function getSession() {
-  return {
-    user: {
-      id: "mock-user-id", // ID fiktif untuk tahap ini
-      name: "Rizka Aflah" // Menggunakan salah satu nama dari Kelompok 7 sebagai contoh
-    }
-  };
-}
+import { getSession } from "@/lib/session";
 
 export default async function DashboardPage() {
   const session = await getSession();
