@@ -104,8 +104,8 @@ export default function AdminUsersClient({ initialUsers }: { initialUsers: User[
   };
 
   return (
-    <div className="bg-card rounded-3xl border border-border/50 shadow-sm overflow-hidden">
-      <Table>
+    <div className="bg-card rounded-3xl border border-border/50 shadow-sm overflow-x-auto">
+      <Table className="min-w-[800px]">
         <TableHeader className="bg-secondary/50">
           <TableRow>
             <TableHead>Nama</TableHead>
@@ -175,7 +175,7 @@ export default function AdminUsersClient({ initialUsers }: { initialUsers: User[
 
       {/* Delete Dialog */}
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent>
+        <DialogContent className="w-[95vw] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Hapus Akun Pengguna</DialogTitle>
             <DialogDescription>
@@ -194,7 +194,7 @@ export default function AdminUsersClient({ initialUsers }: { initialUsers: User[
 
       {/* Reset Password Dialog */}
       <Dialog open={isResetPasswordOpen} onOpenChange={setIsResetPasswordOpen}>
-        <DialogContent>
+        <DialogContent className="w-[95vw] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Reset Password</DialogTitle>
             <DialogDescription>

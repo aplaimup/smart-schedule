@@ -231,3 +231,42 @@
 .fc .fc-daygrid-day.fc-day-today {
   background-color: var(--fc-today-bg-color) !important;
 }
+
+/* ============================================
+   FullCalendar Mobile Overrides (< 640px)
+   ============================================ */
+@media (max-width: 640px) {
+  .fc .fc-toolbar-title {
+    font-size: 1rem !important;
+  }
+
+  .fc .fc-button {
+    padding: 0.3rem 0.5rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .fc .fc-toolbar {
+    flex-direction: column !important;
+    gap: 0.5rem;
+    align-items: stretch !important;
+  }
+
+  .fc .fc-toolbar-chunk {
+    display: flex;
+    justify-content: center;
+  }
+
+  .fc-h-event {
+    font-size: 0.625rem !important;
+    padding: 1px 2px !important;
+  }
+
+  .fc .fc-daygrid-day-number {
+    font-size: 0.75rem !important;
+    padding: 2px 4px !important;
+  }
+
+  .fc .fc-col-header-cell-cushion {
+    font-size: 0.7rem !important;
+  }
+}

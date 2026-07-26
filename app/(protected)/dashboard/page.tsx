@@ -60,12 +60,12 @@ export default async function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6 md:p-10 font-sans">
+    <div className="min-h-screen bg-background p-4 md:p-6 lg:p-10 font-sans">
       <div className="max-w-6xl mx-auto space-y-10">
         
         {/* Header Section */}
         <header>
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground break-words">
             Halo, {session.user.name}! 👋
           </h1>
           <p className="text-lg text-muted-foreground mt-2 max-w-2xl">

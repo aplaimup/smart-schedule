@@ -28,8 +28,7 @@ export default function LoginPage() {
       if (!res.ok) throw new Error(data.error || "Gagal masuk");
 
       toast.success("Berhasil masuk!");
-      router.push("/dashboard");
-      router.refresh();
+      window.location.href = "/dashboard";
     } catch (error: any) {
       toast.error(error.message);
     } finally {
@@ -49,7 +48,7 @@ export default function LoginPage() {
           Masuk ke akun Smart Schedule AI Anda.
         </p>
 
-        <div className="space-y-4 text-left">
+        <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="space-y-4 text-left">
           <div>
             <label className="text-sm font-medium text-foreground mb-1 block">Email</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="nama@email.com" className="w-full rounded-xl border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" />
@@ -74,13 +73,13 @@ export default function LoginPage() {
           </div>
 
           <Button 
-            onClick={handleLogin} 
+            type="submit" 
             disabled={isLoading}
             className="w-full h-12 rounded-xl mt-4 font-semibold text-base shadow-md group"
           >
             {isLoading ? "Memproses..." : "Masuk"} {!isLoading && <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />}
           </Button>
-        </div>
+        </form>
 
         <p className="mt-8 text-sm text-muted-foreground">
           Belum punya akun? <Link href="/register" className="text-primary hover:underline font-medium">Daftar sekarang</Link>

@@ -35,8 +35,8 @@ export default function AdminTasksClient({ initialTasks }: { initialTasks: TaskW
   };
 
   return (
-    <div className="bg-card rounded-3xl border border-border/50 shadow-sm overflow-hidden">
-      <Table>
+    <div className="bg-card rounded-3xl border border-border/50 shadow-sm overflow-x-auto">
+      <Table className="min-w-[700px]">
         <TableHeader className="bg-secondary/50">
           <TableRow>
             <TableHead>Pemilik</TableHead>

@@ -101,7 +101,7 @@ export default function AIScheduleClient({ tasks }: Props) {
               if (!taskDetail) return null;
 
               return (
-                <div key={item.taskId} className="flex gap-4 p-5 rounded-2xl bg-secondary/30 border border-secondary hover:shadow-md transition-shadow">
+                <div key={item.taskId} className="flex flex-col sm:flex-row gap-4 p-5 rounded-2xl bg-secondary/30 border border-secondary hover:shadow-md transition-shadow">
                   <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center text-lg border border-primary/20">
                     {index + 1}
                   </div>

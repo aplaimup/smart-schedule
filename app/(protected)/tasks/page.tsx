@@ -5,7 +5,7 @@ export default async function TasksPage() {
   const session = await requireSession();
   
   return (
-    <div className="min-h-screen bg-background p-6 md:p-10 font-sans">
+    <div className="min-h-screen bg-background p-4 md:p-6 lg:p-10 font-sans">
       <div className="max-w-6xl mx-auto">
         <header className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight text-foreground">Manajemen Aktivitas</h1>

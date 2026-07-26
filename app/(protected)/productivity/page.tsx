@@ -25,7 +25,7 @@ export default async function ProductivityPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-background p-6 md:p-10 font-sans">
+    <div className="min-h-screen bg-background p-4 md:p-6 lg:p-10 font-sans">
       <div className="max-w-4xl mx-auto space-y-10">
         
         <header className="flex items-center gap-4 mb-8">

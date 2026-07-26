@@ -14,7 +14,8 @@ export async function POST(req: Request) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Menggunakan gemini-3.5-flash karena versi 2.5 sudah tidak tersedia
+    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 
     const { tasks } = await req.json();
 

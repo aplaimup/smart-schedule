@@ -17,7 +17,7 @@ export default async function CalendarPage() {
   });
 
   return (
-    <div className="min-h-screen bg-background p-6 md:p-10 font-sans">
+    <div className="min-h-screen bg-background p-4 md:p-6 lg:p-10 font-sans">
       <div className="max-w-6xl mx-auto">
         <header className="mb-8 flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -29,11 +30,14 @@ export default function Sidebar({ role }: { role?: string }) {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleLogout = () => {
-    document.cookie = "smart-schedule-session=; path=/; max-age=0";
-    document.cookie = "smart-schedule-role=; path=/; max-age=0";
-    router.push("/login");
-    router.refresh();
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Logout failed", error);
+      window.location.href = "/";
+    }
   };
 
   const filteredNavItems = role === "ADMIN" 
@@ -43,13 +47,13 @@ export default function Sidebar({ role }: { role?: string }) {
   return (
     <>
       {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between p-4 bg-card border-b border-border/50 sticky top-0 z-40">
+      <div className="md:hidden flex items-center justify-between p-4 bg-card border-b border-border/50 sticky top-0 z-40 w-full">
         <div className="flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-primary" />
           <span className="font-bold tracking-tight">Smart Schedule</span>
         </div>
-        <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          <Menu className="w-5 h-5" />
+        <Button variant="ghost" size="icon" className="h-11 w-11" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <Menu className="w-6 h-6" />
         </Button>
       </div>
 
@@ -87,6 +91,10 @@ export default function Sidebar({ role }: { role?: string }) {
         </div>
 
         <div className="p-4 border-t border-border/50">
+          <div className="flex justify-between items-center mb-2 px-2">
+            <span className="text-sm font-medium text-muted-foreground">Tampilan</span>
+            <ThemeToggle />
+          </div>
           <Button 
             variant="ghost" 
             className="w-full justify-start text-muted-foreground hover:text-destructive hover:bg-destructive/10"

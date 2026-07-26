@@ -181,8 +181,8 @@ export default function TasksClient({ userId }: { userId: string }) {
           Belum ada aktivitas. Klik "Tambah Aktivitas" untuk mulai.
         </div>
       ) : (
-        <div className="rounded-md border overflow-hidden">
-          <Table>
+        <div className="rounded-md border overflow-x-auto">
+          <Table className="min-w-[600px]">
             <TableHeader className="bg-secondary/50">
               <TableRow>
                 <TableHead className="w-[50px]"></TableHead>
@@ -241,7 +241,7 @@ export default function TasksClient({ userId }: { userId: string }) {
 
       {/* Form Dialog */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="w-[95vw] sm:max-w-[425px] overflow-y-auto max-h-[90vh]">
           <DialogHeader>
             <DialogTitle>{editingId ? "Edit Aktivitas" : "Tambah Aktivitas"}</DialogTitle>
             <DialogDescription>

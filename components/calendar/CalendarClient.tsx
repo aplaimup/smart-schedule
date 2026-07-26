@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { 
@@ -26,6 +26,16 @@ type CalendarClientProps = {
 export default function CalendarClient({ tasks }: CalendarClientProps) {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [calendarAspectRatio, setCalendarAspectRatio] = useState(1.35);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setCalendarAspectRatio(window.innerWidth < 768 ? 0.8 : 1.35);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Define colors based on priority
   const getEventColors = (priority: "LOW" | "MEDIUM" | "HIGH") => {
@@ -63,7 +73,7 @@ export default function CalendarClient({ tasks }: CalendarClientProps) {
   };
 
   return (
-    <div className="bg-card p-6 md:p-8 rounded-3xl shadow-sm border border-border/50">
+    <div className="bg-card p-3 md:p-6 lg:p-8 rounded-3xl shadow-sm border border-border/50 overflow-hidden">
       <FullCalendar
         plugins={[dayGridPlugin as any]}
         initialView="dayGridMonth"
@@ -74,12 +84,12 @@ export default function CalendarClient({ tasks }: CalendarClientProps) {
           right: "prev,next today"
         }}
         height="auto"
-        aspectRatio={1.35}
+        aspectRatio={calendarAspectRatio}
       />
 
       {/* Task Details Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="w-[95vw] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               {selectedTask?.status === "DONE" ? (

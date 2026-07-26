@@ -49,7 +49,7 @@ export default function RegisterPage() {
           Mulai atur waktu Anda lebih cerdas hari ini.
         </p>
 
-        <div className="space-y-4 text-left">
+        <form onSubmit={(e) => { e.preventDefault(); handleRegister(); }} className="space-y-4 text-left">
           <div>
             <label className="text-sm font-medium text-foreground mb-1 block">Nama Lengkap</label>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Masukkan Nama" className="w-full rounded-xl border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" />
@@ -78,13 +78,13 @@ export default function RegisterPage() {
           </div>
 
           <Button
-            onClick={handleRegister}
+            type="submit"
             disabled={isLoading}
             className="w-full h-12 rounded-xl mt-4 font-semibold text-base shadow-md group"
           >
             {isLoading ? "Memproses..." : "Daftar"} {!isLoading && <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />}
           </Button>
-        </div>
+        </form>
 
         <p className="mt-8 text-sm text-muted-foreground">
           Sudah punya akun? <Link href="/login" className="text-primary hover:underline font-medium">Masuk di sini</Link>

@@ -21,7 +21,7 @@ export default async function AdminUsersPage() {
   });
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8">
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Kelola Pengguna</h1>
         <p className="text-muted-foreground mt-1">Manajemen akun pengguna dan hak akses sistem.</p>
